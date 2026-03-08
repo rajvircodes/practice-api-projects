@@ -4,7 +4,6 @@ const asyncHandler = require("../utils/async-handler");
 // @desc get all notes
 // @route GET/api/v1/notes
 // @access public
-
 const getAllNotes = asyncHandler(async (req, res) => {
   const notes = await Note.find();
   res.status(200).json({
@@ -15,10 +14,15 @@ const getAllNotes = asyncHandler(async (req, res) => {
   });
 });
 
+
+// @desc get note by id
+// @route POST/api/v1/notes:id
+// @access public
 const getNoteById = asyncHandler(async (req, res) => {
   const id = req.params.id;
+  // const {id} = req.params;
   const note = await Note.findById(id);
-  if (!id) {
+  if (!note) {
     return res.status(404).json({
       message: "Note note found",
     });
@@ -30,6 +34,8 @@ const getNoteById = asyncHandler(async (req, res) => {
     data: note,
   });
 });
+
+
 
 // @desc create a new note
 // @route POST/api/v1/notes
@@ -49,8 +55,11 @@ const createNote = asyncHandler(async (req, res) => {
   });
 });
 
-// Update notes
 
+
+// @desc update notes by id
+// @route PUT/api/v1/notes:id
+// @access public
 const updateNote = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
@@ -75,4 +84,27 @@ const updateNote = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { getAllNotes, getNoteById, createNote, updateNote };
+
+// @desc delete note
+// @route DELETE/api/v1/notes:id
+// @access public
+const deleteNote = asyncHandler(async (req, res)=>{
+  const {id} = req.params;
+
+  const deletedNote = await Note.findByIdAndDelete(id)
+  if(!deletedNote){
+    return res.status(404).json({
+      message:"Note not found!",
+      success:false
+    })
+  }
+    res.status(200).json({
+      message:"Note deleted successfully!",
+      success:true,
+      id:id
+    
+    })
+})
+
+
+module.exports = { getAllNotes, getNoteById, createNote, updateNote, deleteNote };

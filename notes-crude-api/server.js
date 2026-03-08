@@ -4,13 +4,18 @@ const connectDB = require("./config/db");
 const port = process.env.PORT || 8080;
 
 
-
-
-connectDB().then((resolve)=>{
-app.listen(port, () => {
-    console.log(`Server is running on ${port}`);
+const startServer = async () =>{
+  connectDB()
+  app.listen(port, () => {
+      console.log(`Server is running on ${port}`);
   });
-})
+}
+
+startServer()
+
+
+
+
 
 
   
