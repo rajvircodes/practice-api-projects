@@ -14,3 +14,7 @@ Steps to follow:
     - Movie
     - Review
 8. implement Authentication + Register + login user password hash 
+9. JWT authentication middleware
+
+
+
