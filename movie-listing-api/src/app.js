@@ -5,7 +5,7 @@ const morgan = require('morgan')
 const errorHandler = require('./middleware/error.middleware')
 const authRoutes = require('./routes/auth.routes')
 const movieRoutes = require('./routes/movie.routes')
-
+const reviewRoutes = require('./routes/review.routes')
 // const {protected} = require('./middleware/auth.middleware')
 const app = express()
 
@@ -17,7 +17,7 @@ app.use(errorHandler)
 // Using routes
 app.use('/api/auth', authRoutes)
 app.use('/api/movies', movieRoutes)
-
+app.use('/api/reviews', reviewRoutes)
 // Protected 
 // app.get('/api/protected', protected, (req, res)=>{
 //     res.json({
@@ -32,10 +32,6 @@ app.get('/', (req, res)=>{
         message:"Movie API running"
     });
 });
-
-
-
-// app.use('/api/auth/register')
 
 
 
