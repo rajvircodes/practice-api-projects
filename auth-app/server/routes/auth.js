@@ -3,12 +3,13 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
+const protect = require('../middleware/authMiddleware')
 
 // generate JWT token
 
-const generateToken = (userid) => {
+const generateToken = (userId) => {
   return jwt.sign(
-    { id: userid }, //payload - data inside token
+    { id: userId }, //payload - data inside token
     process.env.JWT_SECRET, //secret key to sign in
     { expiresIn: "7d" }, // token expires in 7 days
   );
@@ -88,5 +89,23 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });
+
+
+// GET /api/auth/dashboard 
+
+router.get('/dashboard', protect, async (req, res)=>{
+  try {
+    const user = await User.findById(req.userId).select('-password')
+    res.status(200).json({
+      message:`Welcome back! ${user.name}`,
+      user:user
+    })
+
+
+
+  } catch (error) {
+    res.status(500).json({message:'Server error', error:error.message})
+  }
+})
 
 module.exports = router;
