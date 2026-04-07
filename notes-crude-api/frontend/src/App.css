@@ -1,0 +1,105 @@
+/* Basic Reset */
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+ 
+  font-family: 'Josefin Sans', cursive;
+  background: repeating-radial-gradient();
+  color: #333;
+  line-height: 1.6;
+ 
+}
+
+.container {
+  background-color: rgba(35, 11, 87, 0.498);
+  height: 30rem;
+  width: 50rem;
+  padding:10px 20px;
+  border-radius: 12px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+nav{
+    background-color: rgba(35, 11, 87, 0.498);
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.links a{
+    color: white;
+    text-decoration: none;
+    font-size: 1.3rem;
+}
+#heading{
+  text-align: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80%;
+}
+
+form input {
+  border: 1px transparent;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 1.4rem;
+  font-family: cursive;
+  overflow: hidden;
+  outline: none;
+
+}
+
+#top{
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 10px;
+  height: 50px;
+  font-weight: 700;
+}
+
+#bottom {
+  border-radius: 0 0 12px 12px ;
+  display: flex;
+  align-items: start;
+  height: 80%;
+  position: relative;
+  flex: start;
+  font-weight: 500;
+}
+
+#add-note{
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+   background-color: rgba(35, 11, 87, 0.498);
+   color: white;
+   font-size: 20px;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  outline: none;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+}
+
+#add-note:hover{
+  background-color: rgba(22, 5, 59, 0.898);
+}
+
+
