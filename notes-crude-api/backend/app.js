@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express()
 const noteRouter = require('./routes/note.route')
+const cors = require('cors')
 
+// app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/notes', noteRouter)
-
 
 app.get('/', (req, res)=>{
     res.send('Hello world from backend')
