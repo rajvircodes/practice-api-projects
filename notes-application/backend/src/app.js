@@ -12,7 +12,7 @@ app.use(cors({
 }));
 app.use(morgan("dev"))
 
-app.use('/api/notes', notesRoutes)
+app.use('/api/', notesRoutes)
 
 app.get('/', (req, res)=>{
     res.send("Hello world from backend")

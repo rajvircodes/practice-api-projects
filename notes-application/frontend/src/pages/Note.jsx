@@ -9,7 +9,7 @@ const Note = () => {
 
 
     useEffect(() => {
-        api.get('/notes')
+        api.get('/')
             .then((response) => setNotes(response.data.notes))
             .catch((error) => error)
     }, [])
@@ -30,7 +30,7 @@ const Note = () => {
             return;
         }
         try {
-            const response = await api.post('/notes/create', { title, description })
+            const response = await api.post('/create', { title, description })
             setNotes([...notes, response.data.note])
             setTitle("");
             setDescription("")
@@ -39,6 +39,15 @@ const Note = () => {
             console.log(error);
 
         }
+    }
+
+    const editNotes = async ()=>{
+        const response = await api.put('/update',{title, description})
+        setNotes([...notes, response.data.note])
+    }
+
+    const deleteNotes = async ()=>{
+
     }
     return (
         <>
@@ -73,8 +82,8 @@ const Note = () => {
                                 <h3>{note.title}</h3>
                                 <p>{note.description}</p>
                                 <div className="buttons">
-                                    <button>Edit</button>
-                                    <button>Delete</button>
+                                    <button onClick={editNotes}>Edit</button>
+                                    <button onClick={deleteNotes}>Delete</button>
                                 </div>
                             </div>
                         ))
@@ -83,7 +92,6 @@ const Note = () => {
                 </div>
             </div>
         </>
-
     )
 }
 
