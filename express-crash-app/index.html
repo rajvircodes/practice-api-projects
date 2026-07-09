@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express crash app</title>
+    <style>
+      /* Global Reset & Body Styling */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f4f7f6;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      /* Form Container */
+      #contact-form {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      #contact-form h2 {
+        margin-bottom: 20px;
+        color: #333333;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      /* Form Groups (Inputs & Labels) */
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 6px;
+        color: #666666;
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      /* Input & Textarea Fields */
+      #contact-form input[type="text"],
+      #contact-form textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        color: #333333;
+        transition: border-color 0.2s ease;
+        outline: none;
+      }
+
+      /* Fixed height for message box and disabled diagonal resizing */
+      #contact-form textarea {
+        height: 120px;
+        resize: vertical;
+      }
+
+      /* Focus States */
+      #contact-form input:focus,
+      #contact-form textarea:focus {
+        border-color: #007bff;
+      }
+
+      /* Submit Button */
+      #contact-form button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      #contact-form button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="contact-form">
+      <h2>Contact Us</h2>
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea
+          name="message"
+          id="message"
+          placeholder="Type your message here..."
+          required
+        ></textarea>
+      </div>
+
+      <button id="btn" type="submit">Submit</button>
+    </form>
+
+    <script>
+      const contactForm = document.getElementById("contact-form");
+
+      contactForm.addEventListener("submit", async (event) => {
+        // 1. Prevent the browser from refreshing the page
+        event.preventDefault();
+
+        // 2. Grab the values from the input fields
+        const nameValue = document.getElementById("name").value;
+        const messageValue = document.getElementById("message").value;
+
+        try {
+          // 3. Make the POST request to the backend
+          const response = await fetch("http://localhost:3000/message", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Tells the server we are sending JSON
+            },
+            body: JSON.stringify({
+              name: nameValue,
+              message: messageValue,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to submit feedback");
+          }
+
+          const data = await response.json();
+
+          // 4. Do something with the response (e.g., alert the user)
+          alert(data.message);
+
+          // 5. Optional: Reset the form fields after successful submission
+          contactForm.reset();
+        } catch (error) {
+          console.error("Error:", error);
+          alert("Something went wrong while sending your message.");
+        }
+      });
+    </script>
+  </body>
+</html>
