@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import Note from "../models/notes.model.js";
+import { Request, Response } from "express";
+import { RequestHandler } from "express";
 
-const getAllNotes = async (req, res) => {
+const getAllNotes = async (req:Request, res:Response):Promise <Response | void> => {
   try {
     const notes = await Note.find();
 
@@ -11,6 +13,7 @@ const getAllNotes = async (req, res) => {
         message: "Notes not found your collection is empty",
         note: [],
       });
+      return;
     }
 
     res.status(200).json({
@@ -19,7 +22,8 @@ const getAllNotes = async (req, res) => {
       notes: notes,
     });
   } catch (error) {
-    console.log("Notes getting error", error.message);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.log("Notes getting error", errorMessage);
 
     res.status(500).json({
       success: false,
@@ -28,7 +32,7 @@ const getAllNotes = async (req, res) => {
   }
 };
 
-const createNotes = async (req, res) => {
+const createNotes = async (req:Request, res:Response):Promise<Response | void> => {
   try {
     const { title, description } = req.body;
 
@@ -47,7 +51,8 @@ const createNotes = async (req, res) => {
       note: note,
     });
   } catch (error) {
-    console.log(error.message);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.log(errorMessage);
     res.status(500).json({
       success: false,
       message: "Server error",
@@ -55,7 +60,7 @@ const createNotes = async (req, res) => {
   }
 };
 
-const updateNotes = async (req, res) => {
+const updateNotes = async (req:Request, res:Response):Promise < Response | void> => {
   try {
     const { id } = req.params;
     const { title, description } = req.body;
@@ -84,7 +89,8 @@ const updateNotes = async (req, res) => {
       note: note,
     });
   } catch (error) {
-    console.log(error.message);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.log(errorMessage);
     res.status(500).json({
       success: false,
       message: "Server error",
@@ -92,7 +98,7 @@ const updateNotes = async (req, res) => {
   }
 };
 
-const deleteNotes = async (req, res) => {
+const deleteNotes = async (req:Request, res:Response):Promise <Response | void> => {
   try {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -115,12 +121,14 @@ const deleteNotes = async (req, res) => {
       message: "Note deleted",
     });
   } catch (error) {
-    console.log(error.message);
+    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    console.log(errorMessage);
     res.status(500).json({
       success: false,
       message: "server error",
     });
   }
 };
+
 
 export { getAllNotes, createNotes, updateNotes, deleteNotes };
