@@ -16,7 +16,6 @@ sequelize
 //   Health checker
 
 app.get("/", (req, res) => {
-  console.log("Hello world from backend!");
   res.send("hello world from backend!");
 });
 
@@ -46,7 +45,7 @@ app.get("/products/:id", async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id);
     if (!product) {
-      res.status(404).json({ message: "Product not found!" });
+      return res.status(404).json({ message: "Product not found!" });
     }
 
     res.status(200).json(product);
