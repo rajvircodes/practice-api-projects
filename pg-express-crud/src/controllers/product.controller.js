@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const { Category } = require("../models/category.model");
 
 // 1.CREATE (POST)
 const createProduct = async (req, res) => {
@@ -13,7 +14,9 @@ const createProduct = async (req, res) => {
 // READ ALL PRODUCTS
 const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const products = await Product.findAll({
+      include: Category,
+    });
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -57,10 +60,32 @@ deleteProduct = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+const createCategory = async (req, res) => {
+  try {
+    const category = await Category.create(req.body); // e.g., { "name": "Electronics" }
+    res.status(201).json(category);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+const getCateProducts = async (req, res) => {
+  try {
+    const categories = await Category.findAll({
+      include: Product, // Returns categories with an array of their products!
+    });
+    res.json(categories);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 module.exports = {
   createProduct,
   getAllProducts,
   getProductById,
   updateProduct,
   deleteProduct,
+  createCategory,
+  getCateProducts,
 };
