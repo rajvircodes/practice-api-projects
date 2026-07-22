@@ -1,34 +1,41 @@
-# Backend Mini Projects
+# 🚀 Practice API Projects
 
-A collection of small backend projects built for learning and practicing backend development concepts such as CRUD operations, authentication, and API design.
+A collection of backend practice projects built while learning **Node.js**, **Express.js**, **MongoDB**, **PostgreSQL**, authentication, file uploads, and REST APIs.
 
-## Projects Included
+Each project focuses on a specific backend concept and is organized into its own directory for easy exploration.
 
-### 1. Notes CRUD API
-A simple REST API to create, read, update, and delete notes.
+## 📂 Projects
 
-### 2. JWT Auth Demo
-Basic authentication system using JSON Web Tokens (JWT).
+- 🔐 Authentication App
+- 📝 Notes CRUD API
+- 📄 File Upload API
+- 🎬 Movie Listing API
+- 🐘 PostgreSQL CRUD API
+- 🌐 Express Crash Course App
+- 🔗 Facebook Connection Demo
+- 📒 Notes Application
 
-### 3. Movie Listing API
-API to manage and list movies.
+## 🛠️ Tech Stack
 
-### 4. URL Shortener
-A service that converts long URLs into short links.
-
-## Tech Stack
 - Node.js
 - Express.js
-- MongoDB / JSON Storage
+- MongoDB
+- PostgreSQL
+- Mongoose
 - JWT Authentication
+- Multer
+- React (for selected projects)
 
-## Purpose
-This repository is created to practice backend development and understand core concepts like:
-- REST API design
-- Authentication
-- Database operations
-- Middleware
+## 🎯 Purpose
+
+This repository serves as a personal backend learning playground where I practice building APIs, exploring different databases, and implementing common backend features.
+
+## 👨‍💻 Author
+
+**Rajvirsinh**
+
+GitHub: https://github.com/rajvircodes
 
 ---
 
-Feel free to explore each project inside its folder.
+⭐ If you found this repository helpful, consider giving it a star.

@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   const { name, message } = req.body;
-  console.log(name, message);
 
   return res.json({ message: "Thanks for feedback!" });
 });
