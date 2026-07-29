@@ -1,5 +1,6 @@
 const Product = require("../models/Product");
 const { Category } = require("../models/category.model");
+const { Op } = require("sequelize");
 
 // 1.CREATE (POST)
 const createProduct = async (req, res) => {
@@ -14,6 +15,11 @@ const createProduct = async (req, res) => {
 // READ ALL PRODUCTS
 const getAllProducts = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const offset = (page - 1) * limit;
+
+    const { minPrice, maxPrice, search } = req.query;
     const products = await Product.findAll({
       include: Category,
     });

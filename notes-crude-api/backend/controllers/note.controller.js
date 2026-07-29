@@ -14,7 +14,6 @@ const getAllNotes = asyncHandler(async (req, res) => {
   });
 });
 
-
 // @desc get note by id
 // @route POST/api/v1/notes:id
 // @access public
@@ -35,8 +34,6 @@ const getNoteById = asyncHandler(async (req, res) => {
   });
 });
 
-
-
 // @desc create a new note
 // @route POST/api/v1/notes
 // @access public
@@ -54,8 +51,6 @@ const createNote = asyncHandler(async (req, res) => {
     data: newNote,
   });
 });
-
-
 
 // @desc update notes by id
 // @route PUT/api/v1/notes:id
@@ -84,27 +79,30 @@ const updateNote = asyncHandler(async (req, res) => {
   });
 });
 
-
 // @desc delete note
 // @route DELETE/api/v1/notes:id
 // @access public
-const deleteNote = asyncHandler(async (req, res)=>{
-  const {id} = req.params;
+const deleteNote = asyncHandler(async (req, res) => {
+  const { id } = req.params;
 
-  const deletedNote = await Note.findByIdAndDelete(id)
-  if(!deletedNote){
+  const deletedNote = await Note.findByIdAndDelete(id);
+  if (!deletedNote) {
     return res.status(404).json({
-      message:"Note not found!",
-      success:false
-    })
+      message: "Note not found!",
+      success: false,
+    });
   }
-    res.status(200).json({
-      message:"Note deleted successfully!",
-      success:true,
-      id:id
-    
-    })
-})
+  res.status(200).json({
+    message: "Note deleted successfully!",
+    success: true,
+    id: id,
+  });
+});
 
-
-module.exports = { getAllNotes, getNoteById, createNote, updateNote, deleteNote };
+module.exports = {
+  getAllNotes,
+  getNoteById,
+  createNote,
+  updateNote,
+  deleteNote,
+};
